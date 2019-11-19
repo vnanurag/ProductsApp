@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,14 +44,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Autofac\ServiceModule.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Interfaces\IProductsService.cs" />
+    <Compile Include="Services\ProductsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Products.DataAccess\Products.DataAccess.csproj">
       <Project>{31e167f2-287b-47e1-8bd5-eab38120270e}</Project>
       <Name>Products.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Products.Domain\Products.Domain.csproj">
+      <Project>{4cc4d7d6-d139-4a6a-a66c-454e23e8f941}</Project>
+      <Name>Products.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
