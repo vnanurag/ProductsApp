@@ -1,0 +1,6 @@
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\bin\Debug\Products.Domain.dll
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\bin\Debug\Products.Domain.pdb
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\obj\Debug\Products.Domain.csprojAssemblyReference.cache
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\obj\Debug\Products.Domain.csproj.CoreCompileInputs.cache
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\obj\Debug\Products.Domain.dll
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\obj\Debug\Products.Domain.pdb

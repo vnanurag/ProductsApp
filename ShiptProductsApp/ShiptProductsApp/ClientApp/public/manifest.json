@@ -1,6 +1,6 @@
 {
-  "short_name": "ShiptProductsApp",
-  "name": "ShiptProductsApp",
+  "short_name": "ProductsApp",
+  "name": "ProductsApp",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,0 +1,6 @@
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.DataAccess\bin\Debug\Products.DataAccess.dll
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.DataAccess\bin\Debug\Products.DataAccess.pdb
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.DataAccess\obj\Debug\Products.DataAccess.csprojAssemblyReference.cache
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.DataAccess\obj\Debug\Products.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.DataAccess\obj\Debug\Products.DataAccess.dll
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.DataAccess\obj\Debug\Products.DataAccess.pdb

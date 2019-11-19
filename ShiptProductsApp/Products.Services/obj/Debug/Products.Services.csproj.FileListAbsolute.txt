@@ -1,0 +1,9 @@
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Services\bin\Debug\Products.Services.dll
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Services\bin\Debug\Products.Services.pdb
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Services\bin\Debug\Products.DataAccess.dll
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Services\bin\Debug\Products.DataAccess.pdb
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Services\obj\Debug\Products.Services.csprojAssemblyReference.cache
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Services\obj\Debug\Products.Services.csproj.CoreCompileInputs.cache
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Services\obj\Debug\Products.Services.csproj.CopyComplete
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Services\obj\Debug\Products.Services.dll
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Services\obj\Debug\Products.Services.pdb
