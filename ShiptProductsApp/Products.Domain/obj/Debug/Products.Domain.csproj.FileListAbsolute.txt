@@ -4,3 +4,11 @@ C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Dom
 C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\obj\Debug\Products.Domain.csproj.CoreCompileInputs.cache
 C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\obj\Debug\Products.Domain.dll
 C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\obj\Debug\Products.Domain.pdb
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\bin\Debug\AutoMapper.dll
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\bin\Debug\AutoMapper.pdb
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\bin\Debug\AutoMapper.xml
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\obj\Debug\Products.Domain.csproj.CopyComplete
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\bin\Debug\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\bin\Debug\AutoMapper.Extensions.Microsoft.DependencyInjection.pdb
+C:\Users\avutukuri\Downloads\Anurag\Shipt\ReactApp\ShiptProductsApp\Products.Domain\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml

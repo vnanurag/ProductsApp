@@ -14,11 +14,6 @@ namespace Products.DataAccess.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
-
-            // Register Services
-            builder
-                .RegisterType<ProductsDynamoDbRepo>()
-                .As<IProductsDynamoDbRepo>();
         }
     }
 }

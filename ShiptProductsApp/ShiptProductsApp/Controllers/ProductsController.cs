@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Products.Domain.Models;
 using Products.Services.Services.Interfaces;
 
 namespace ProductsApp.Controllers
@@ -28,9 +30,17 @@ namespace ProductsApp.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<ProductInfo>> Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var products = await _productsService.GetProducts();
+                return products.ToArray();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         // GET: api/Products/5
@@ -41,9 +51,18 @@ namespace ProductsApp.Controllers
         /// <param name="id">ProductId of the product to be retrieved</param>
         /// <returns>Product Details</returns>
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ProductInfo> Get(int id)
         {
-            return "value";
+            try
+            {
+                var product = await _productsService.GetProductById(id);
+                return product;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         // POST: api/Products
@@ -53,8 +72,17 @@ namespace ProductsApp.Controllers
         /// </summary>
         /// <param name="value">Details of the product to be added</param>
         [HttpPost("add")]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] ProductInfo product)
         {
+            try
+            {
+                _productsService.AddProduct(product);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         // PUT: api/Products/5
@@ -65,8 +93,18 @@ namespace ProductsApp.Controllers
         /// <param name="id">ProductId of the product to be updated</param>
         /// <param name="value">Updated details of the product</param>
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ProductInfo> Put(int id, [FromBody] ProductInfo product)
         {
+            try
+            {
+                var updatedProduct = await _productsService.UpdateProduct(id, product);
+                return updatedProduct;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         // DELETE: api/ApiWithActions/5
@@ -78,6 +116,15 @@ namespace ProductsApp.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            try
+            {
+                _productsService.DeleteProduct(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

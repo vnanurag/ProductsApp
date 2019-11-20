@@ -15,15 +15,6 @@ namespace Products.Services.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
-
-            // Register Services
-            builder
-                .RegisterType<ProductsService>()
-                .As<IProductsService>();
-
-            // Register Modules
-            builder
-                .RegisterModule<DataAccessModule>();
         }
     }
 }

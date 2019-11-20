@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Products.DataAccess.Models
+{
+    public class ProductInfo
+    {
+        public int ProductId { get; set; }
+        public string Name { get; set; }
+        public int Price { get; set; }
+        public string SerialNumber { get; set; }
+    }
+}

@@ -1,4 +1,4 @@
-﻿using Products.Domain.Models;
+﻿using Products.DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ namespace Products.DataAccess.Repos.Interfaces
 {
     public interface IProductsDynamoDbRepo
     {
-        ProductInfo[] GetProducts();
-        ProductInfo GetProductById(int id);
+        Task<ProductInfo[]> GetProducts();
+        Task<ProductInfo> GetProductById(int id);
         void AddProduct(ProductInfo product);
-        ProductInfo UpdateProduct(int id);
+        Task<ProductInfo> UpdateProduct(ProductInfo product);
         void DeleteProduct(int id);
 
     }

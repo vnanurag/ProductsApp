@@ -1,4 +1,8 @@
 ﻿using Autofac;
+using Products.Services.Autofac;
+using Products.Services.Services;
+using Products.Services.Services.Interfaces;
+using ProductsApp.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
