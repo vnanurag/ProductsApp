@@ -110,6 +110,7 @@ namespace Products.DataAccess.Repos
                         Price = x.Price,
                         SerialNumber = x.SerialNumber
                     })
+                    .OrderByDescending(x => x.Price)
                     .ToArray();
 
                 return result;
