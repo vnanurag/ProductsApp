@@ -8,9 +8,9 @@ import Products from '../src/components/Products';
 
 export default () => (
   <Layout>
-    <Route exact path='/' component={Home} />
+    <Route exact path='/Home' component={Home} />
     <Route path='/counter' component={Counter} />
         <Route path='/fetchdata/:startDateIndex?' component={FetchData} />
-        <Route path='/products' component={Products} />
+        <Route path='/' component={Products} />
   </Layout>
 );

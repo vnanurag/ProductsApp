@@ -46,13 +46,13 @@ namespace Products.DataAccess.Repos
             {
                 var newProduct = new ProductsTable
                 {
-                    ProductId = 12,
-                    Name = "TestName12",
-                    Price = 120,
-                    SerialNumber = "TestSerialNumber12"
+                    ProductId = product.ProductId,
+                    Name = product.Name,
+                    Price = product.Price,
+                    SerialNumber = product.SerialNumber
                 };
 
-                await _context.SaveAsync(product);
+                await _context.SaveAsync(newProduct);
             }
             catch (Exception ex)
             {

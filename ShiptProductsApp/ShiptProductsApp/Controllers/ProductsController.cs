@@ -11,7 +11,6 @@ using Products.Services.Services.Interfaces;
 
 namespace ProductsApp.Controllers
 {
-    [EnableCors("AllOrigins")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -76,6 +75,8 @@ namespace ProductsApp.Controllers
         {
             try
             {
+                var randomProductId = new Random();
+                product.ProductId = randomProductId.Next();
                 _productsService.AddProduct(product);
             }
             catch (Exception ex)

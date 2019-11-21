@@ -1,0 +1,11 @@
+﻿.addProduct{
+    padding: 20px;
+}
+
+.addProduct label {
+    padding: 5px;
+}
+
+.addProduct input{
+    margin-left: 10px;
+}

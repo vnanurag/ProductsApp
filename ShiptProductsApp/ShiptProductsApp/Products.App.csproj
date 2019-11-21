@@ -21,6 +21,10 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.0-preview3.19553.2" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.0-preview3.19553.2" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="3.1.0-preview3.19553.2" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.7.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
   </ItemGroup>
 
@@ -31,8 +35,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\components\Products.js" />
+    <None Remove="ClientApp\src\store\ProductsStore.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Products.Domain\Products.Domain.csproj" />
     <ProjectReference Include="..\Products.Services\Products.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\components\Products.js" />
+    <TypeScriptCompile Include="ClientApp\src\store\ProductsStore.js" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
