@@ -9,7 +9,7 @@ Tech Stack used
 Accessing the code
 	1. Extract the files from the zipped folder.
 	2. Install Visual Studio and open the project.
-	3. Execute the project.
+	3. Execute the project solution. ReactApp -> ShiptProductsApp -> ProductsApp.sln
 	4. A list of Products along with their price, name and serila numbers will be displayed sorted by price descending.
 	5. Click on the price column to sort the products ascending/descending
 	6. Add Product feature lets you add a product to the list.
