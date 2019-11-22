@@ -7,15 +7,15 @@ export default class AddProduct extends Component {
             <div className='addProduct'>
                 <div>
                     <label>Name : </label>
-                    <input id='name' type="text" value={this.props.name} onChange={this.props.handleNameChange} />                   
+                    <input id='name' type="text" value={this.props.name} onChange={this.props.handleInputChange} />                   
                 </div>
                 <div>
                     <label>Price : </label>
-                    <input id='price' type="text" value={this.props.price} onChange={this.props.handlePriceChange} />
+                    <input id='price' type="text" value={this.props.price} onChange={this.props.handleInputChange} />
                 </div>
                 <div>
                     <label>Serial Number : </label>
-                    <input id='serialNumber' type="text" value={this.props.serialNumber} onChange={this.props.handleSerialNumberChange} />
+                    <input id='serialNumber' type="text" value={this.props.serialNumber} onChange={this.props.handleInputChange} />
                 </div>
                 <div>
                     <button onClick={this.props.add}>+ Add</button>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http.Description;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,16 +30,17 @@ namespace ProductsApp.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<ProductInfo>> Get()
+        [ResponseType(typeof(ProductInfo[]))]
+        public async Task<IActionResult> Get()
         {
             try
             {
                 var products = await _productsService.GetProducts();
-                return products.ToArray();
+                return Ok(products.ToArray());
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -50,17 +52,18 @@ namespace ProductsApp.Controllers
         /// <param name="id">ProductId of the product to be retrieved</param>
         /// <returns>Product Details</returns>
         [HttpGet("{id}")]
-        public async Task<ProductInfo> Get(int id)
+        [ResponseType(typeof(ProductInfo))]
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
                 var product = await _productsService.GetProductById(id);
-                return product;
+                return Ok(product);
             }
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 
@@ -71,18 +74,19 @@ namespace ProductsApp.Controllers
         /// </summary>
         /// <param name="value">Details of the product to be added</param>
         [HttpPost("add")]
-        public async Task<IEnumerable<ProductInfo>> Post([FromBody] ProductInfo product)
+        [ResponseType(typeof(ProductInfo[]))]
+        public async Task<IActionResult> Post([FromBody] ProductInfo product)
         {
             try
             {
                 var randomProductId = new Random();
                 product.ProductId = randomProductId.Next();
                 var result = await _productsService.AddProduct(product);
-                return result.ToArray();
+                return Ok(result.ToArray());
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -94,17 +98,18 @@ namespace ProductsApp.Controllers
         /// <param name="id">ProductId of the product to be updated</param>
         /// <param name="value">Updated details of the product</param>
         [HttpPut("{id}")]
-        public async Task<ProductInfo> Put(int id, [FromBody] ProductInfo product)
+        [ResponseType(typeof(ProductInfo))]
+        public async Task<IActionResult> Put(int id, [FromBody] ProductInfo product)
         {
             try
             {
                 var updatedProduct = await _productsService.UpdateProduct(id, product);
-                return updatedProduct;
+                return Ok(updatedProduct);
             }
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 
@@ -115,16 +120,17 @@ namespace ProductsApp.Controllers
         /// </summary>
         /// <param name="id">ProductId of the product to be deleted</param>
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             try
             {
                 _productsService.DeleteProduct(id);
+                return Ok();
             }
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
     }

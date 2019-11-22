@@ -1,28 +1,26 @@
 ﻿const requestProducts = "REQUESTED_ALL_PRODUCTS";
-const requestProductsSuccess = "REQUEST_ALL_PRODUCTS_SUCCESS";
-const requestProductsFailure = "REQUEST_ALL_PRODUCTS_FAILED";
+const getAllProductsSuccess = "GET_ALL_PRODUCTS_SUCCESS";
+const getAllProductsFailure = "GET_ALL_PRODUCTS_FAILED";
 
 const requestProductById = "REQUESTED_PRODUCT_BY_ID";
-const requestProductByIdSuccess = "REQUEST_PRODUCT_BY_ID_SUCCESS";
-const requestProductByIdFailure = "REQUEST_PRODUCT_BY_ID_FAILED";
+const getProductByIdSuccess = "GET_PRODUCT_BY_ID_SUCCESS";
+const getProductByIdFailure = "GET_PRODUCT_BY_ID_FAILED";
 
 const requestAddProduct = "REQUESTED_ADD_PRODUCT";
-const requestAddProductSuccess = "REQUEST_ADD_PRODUCT_SUCCESS";
-const requestAddProductFailure = "REQUEST_ADD_PRODUCT_FAILED";
+const addProductSuccess = "ADD_PRODUCT_SUCCESS";
+const addProductFailure = "ADD_PRODUCT_FAILED";
 
 const requestUpdateProduct = "REQUESTED_UPDATE_PRODUCT";
-const requestUpdateProductSuccess = "REQUEST_UPDATE_PRODUCT_SUCCESS";
-const requestUpdateProductFailure = "REQUEST_UPDATE_PRODUCT_FAILED";
+const updateProductSuccess = "UPDATE_PRODUCT_SUCCESS";
+const updateProductFailure = "UPDATE_PRODUCT_FAILED";
 
 const requestDeleteProduct = "REQUESTED_DELETE_PRODUCT";
-const requestDeleteProductSuccess = "REQUEST_DELETE_PRODUCT_SUCCESS";
-const requestDeleteProductFailure = "REQUEST_DELETE_PRODUCT_FAILED";
+const deleteProductSuccess = "DELETE_PRODUCT_SUCCESS";
+const deleteProductFailure = "DELETE_PRODUCT_FAILED";
 
 const nameInputChanged = "NAME_INPUT_CHANGED";
 const priceInputChanged = "PRICE_INPUT_CHANGED";
 const serialNumberInputChanged = "SERIAL_NUMBER_INPUT_CHANGED";
-
-const priceSort = "SORTED_BY_PRICE";
 
 const initialState = {
     products: [],
@@ -31,7 +29,8 @@ const initialState = {
         price: '',
         serialNumber: ''
     },
-    isLoading: false
+    isLoading: false,
+    error: ''
 };
 
 export const actionCreators = {
@@ -48,9 +47,9 @@ export const actionCreators = {
             const response = await fetch(url, config);
             const products = await response.json();
 
-            dispatch({ type: requestProductsSuccess, products });
+            dispatch({ type: getAllProductsSuccess, products });
         } catch (e) {
-            dispatch({ type: requestProductsFailure, e });
+            dispatch({ type: getAllProductsFailure, e });
         }  
     },
 
@@ -67,9 +66,9 @@ export const actionCreators = {
             const response = await fetch(url, config);
             const product = await response.json();
 
-            dispatch({ type: requestProductByIdSuccess, product });
+            dispatch({ type: getProductByIdSuccess, product });
         } catch (e) {
-            dispatch({ type: requestProductByIdFailure, e });
+            dispatch({ type: getProductByIdFailure, e });
         }  
     },
 
@@ -91,9 +90,15 @@ export const actionCreators = {
             const response = await fetch(url, config);
             const products = await response.json();
 
-            dispatch({ type: requestAddProductSuccess, products });
+            if (response.ok) {
+                dispatch({ type: addProductSuccess, products });
+            }
+            else {
+                const error = 'Error adding product';
+                dispatch({ type: addProductFailure, error });
+            }
         } catch (e) {
-            dispatch({ type: requestAddProductFailure, e });
+            dispatch({ type: addProductFailure, e });
         }  
     },
 
@@ -111,9 +116,9 @@ export const actionCreators = {
             const response = await fetch(url, config);
             const product = await response.json();
 
-            dispatch({ type: requestUpdateProductSuccess, product });
+            dispatch({ type: updateProductSuccess, product });
         } catch (e) {
-            dispatch({ type: requestUpdateProductFailure, e });
+            dispatch({ type: updateProductFailure, e });
         }  
     },
 
@@ -127,12 +132,11 @@ export const actionCreators = {
                     'Content-Type': 'application/json'
                 }
             };
-            const response = await fetch(url, config);
-            const products = await response.json();
+            await fetch(url, config);
 
-            dispatch({ type: requestDeleteProductSuccess, products });
+            dispatch({ type: deleteProductSuccess, id });
         } catch (e) {
-            dispatch({ type: requestDeleteProductFailure, e });
+            dispatch({ type: deleteProductFailure, e });
         }  
     },
 
@@ -140,22 +144,22 @@ export const actionCreators = {
         let inputType = input.target.id;
         let value = input.target.value;
 
-        if (inputType === 'name') {
-            dispatch({ type: nameInputChanged, value })
-        }
-        else if (inputType === 'price') {
-            dispatch({ type: priceInputChanged, value })
-        }
-        else if (inputType === 'serialNumber') {
-            dispatch({ type: serialNumberInputChanged, value })
+        switch (inputType) {
+            case 'name': {
+                dispatch({ type: nameInputChanged, value });
+                break;
+            }
+            case 'price': {
+                dispatch({ type: priceInputChanged, value });
+                break;
+            }
+            case 'serialNumber': {
+                dispatch({ type: serialNumberInputChanged, value });
+                break;
+            }
+            default:
         }
     },
-
-    sortColumn: () => async (dispatch, getState) => {
-        const state = getState();
-        const products = state.products.products;
-        dispatch({ type: priceSort, products })
-    }
 };
 
 export const reducer = (state, action) => {
@@ -168,14 +172,14 @@ export const reducer = (state, action) => {
                 isLoading: true
             };
         }
-        case requestProductsSuccess: {
+        case getAllProductsSuccess: {
             return {
                 ...state,
                 products: action.products,
                 isLoading: false
             }
         }
-        case requestProductsFailure: {
+        case getAllProductsFailure: {
             return {
                 ...state,
                 error: action.e,
@@ -188,14 +192,14 @@ export const reducer = (state, action) => {
                 isLoading: true
             };
         }
-        case requestProductByIdSuccess: {
+        case getProductByIdSuccess: {
             return {
                 ...state,
                 products: action.products,
                 isLoading: false
             }
         }
-        case requestProductByIdFailure: {
+        case getProductByIdFailure: {
             return {
                 ...state,
                 error: action.e,
@@ -208,7 +212,7 @@ export const reducer = (state, action) => {
                 isLoading: true
             };
         }
-        case requestAddProductSuccess: {
+        case addProductSuccess: {
             return {
                 ...state,
                 products: action.products,
@@ -216,10 +220,10 @@ export const reducer = (state, action) => {
                 isLoading: false
             }
         }
-        case requestAddProductFailure: {
+        case addProductFailure: {
             return {
                 ...state,
-                error: action.e,
+                error: action.error,
                 isLoading: false
             }
         }
@@ -229,14 +233,14 @@ export const reducer = (state, action) => {
                 isLoading: true
             };
         }
-        case requestUpdateProductSuccess: {
+        case updateProductSuccess: {
             return {
                 ...state,
                 products: action.products,
                 isLoading: false
             }
         }
-        case requestUpdateProductFailure: {
+        case updateProductFailure: {
             return {
                 ...state,
                 error: action.e,
@@ -249,14 +253,14 @@ export const reducer = (state, action) => {
                 isLoading: true
             }
         }
-        case requestDeleteProductSuccess: {
+        case deleteProductSuccess: {
             return {
                 ...state,
-                products: action.products,
+                products: state.products.filter((prod) => prod.productId !== action.id),
                 isLoading: false
             }
         }
-        case requestDeleteProductFailure: {
+        case deleteProductFailure: {
             return {
                 ...state,
                 error: action.e,
@@ -288,12 +292,6 @@ export const reducer = (state, action) => {
                     ...state.product,
                     serialNumber: action.value
                 }
-            }
-        }
-        case priceSort: {
-            return {
-                ...state,
-                products: action.products
             }
         }
         default: {

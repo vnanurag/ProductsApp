@@ -1,21 +1,19 @@
 ﻿import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Route } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Link, BrowserRouter as Router } from 'react-router-dom';
-import { actionCreators, ProductsStore } from '../store/ProductsStore';
-import { IProductsStore } from '../store/ProductsStore';
-import ReactDataGrid from 'react-data-grid';
-import 'react-table/react-table.css';
+import { actionCreators } from '../store/ProductsStore';
 import AddProduct from './AddProduct';
 import '../components/Products.css';
+import EditProduct from './EditProduct';
 
 class Products extends Component {
     constructor(props) {
         super(props)
             this.state = {
-                showAdd: false
+                showAdd: false,
+                showEdit: false,
+                data: [],
+                sort_order: 'asc'
         };
         
     }
@@ -24,23 +22,9 @@ class Products extends Component {
         this.props.getAllProducts();        
     }
 
-    //columns = [
-    //    {
-    //        key: "name",
-    //        name: "Name"
-    //    },
-    //    {
-    //        key: "price",
-    //        name: "Price",
-    //        sortDescendingFirst: true
-    //    },
-    //    {
-    //        key: "serialNumber",
-    //        name: "Serial Number"
-    //    }
-    //].map(col => ({ ...col, ...defaultColumnProperties }));
-
     render() {
+        const products = this.props ? this.props.products : this.state.data;
+        
         return (
             <div>
                 <div><h3>Products</h3></div>
@@ -52,9 +36,7 @@ class Products extends Component {
                                 name={this.props.product.name}
                                 price={this.props.product.price}
                                 serialNumber={this.props.product.serialNumber}
-                                handleNameChange={(e) => this.props.handleInputChange(e)}
-                                handlePriceChange={(e) => this.props.handleInputChange(e)}
-                                handleSerialNumberChange={(e) => this.props.handleInputChange(e)}
+                                handleInputChange={(e) => this.props.handleInputChange(e)}
                                 add={this.addProduct.bind(this)}
                                 close={this.closeAdd.bind(this)} />
                         </div>
@@ -64,22 +46,20 @@ class Products extends Component {
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th onClick={(e) => this.sortColumn(e)}>Price</th>
+                            <th onClick={this.sortColumn.bind(this)}>Price</th>
                             <th>Serial Number</th>
-                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.products.map(product =>
+                        {products.map(product =>
                             <tr key={product.productId}>
                                 <td>{product.name}</td>
                                 <td>{product.price}</td>
-                                <td>{product.serialNumber}</td>
-                                <td><button id='edit' onClick={editProduct}>Edit</button></td>
-                                <td><button id='delete' onClick={deleteProduct}>Delete</button></td>
+                                <td>{product.serialNumber}</td>                                
+                                <td><button id='delete' onClick={() => this.deleteProduct(product.productId)}>Delete</button></td>
                             </tr>
-                            )}
+                        )}
                     </tbody>
                 </table>
             </div>
@@ -106,31 +86,48 @@ class Products extends Component {
         this.props.addProduct();
     }
 
-    sortColumn(e) {
-        this.props.products.sort((a, b) => a.price - b.price);
-        this.props.sortColumn();
+    sortColumn() {
+        switch (this.state.sort_order) {
+            case 'asc': {
+                this.setState({
+                    sort_order: 'desc'
+                });
+                break;
+            }
+            default: {
+                this.setState({
+                    sort_order: 'asc'
+                });
+                break;
+            }
+        }
+
+        this.setState({
+            data: this.state.sort_order === 'asc'
+                ? this.props.products.sort((a, b) => a.price - b.price)
+                : this.props.products.sort((a, b) => b.price - a.price)
+        })
+    }
+
+    edit() {
+        this.setState({
+            showEdit: true
+        });
+    }
+
+    closeEdit() {
+        this.setState({
+            showEdit: false
+        });
+    }
+
+    editProduct() {
 
     }
 
-    //const sortRows = (initialRows, sortColumn, sortDirection) => rows => {
-    //    const comparer = (a, b) => {
-    //        if (sortDirection === "ASC") {
-    //            return a[sortColumn] > b[sortColumn] ? 1 : -1;
-    //        } else if (sortDirection === "DESC") {
-    //            return a[sortColumn] < b[sortColumn] ? 1 : -1;
-    //        }
-    //    };
-    //    return sortDirection === "NONE" ? initialRows : [...rows].sort(comparer);
-    //};
-}
-
-
-const editProduct = () => {
-    console.log("Edit");
-}
-
-const deleteProduct = () => {
-    console.log("Delete");
+    deleteProduct(id) {
+        this.props.deleteProduct(id);
+    }
 }
 
 export default connect(
