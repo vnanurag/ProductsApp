@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Link, BrowserRouter as Router } from 'react-router-dom';
 import { actionCreators, ProductsStore } from '../store/ProductsStore';
 import { IProductsStore } from '../store/ProductsStore';
-import ReactTable from 'react-table';
+import ReactDataGrid from 'react-data-grid';
 import 'react-table/react-table.css';
 import AddProduct from './AddProduct';
 import '../components/Products.css';
@@ -17,11 +17,28 @@ class Products extends Component {
             this.state = {
                 showAdd: false
         };
+        
     }
 
     componentWillMount() {
-        this.props.getAllProducts();
+        this.props.getAllProducts();        
     }
+
+    //columns = [
+    //    {
+    //        key: "name",
+    //        name: "Name"
+    //    },
+    //    {
+    //        key: "price",
+    //        name: "Price",
+    //        sortDescendingFirst: true
+    //    },
+    //    {
+    //        key: "serialNumber",
+    //        name: "Serial Number"
+    //    }
+    //].map(col => ({ ...col, ...defaultColumnProperties }));
 
     render() {
         return (
@@ -38,7 +55,8 @@ class Products extends Component {
                                 handleNameChange={(e) => this.props.handleInputChange(e)}
                                 handlePriceChange={(e) => this.props.handleInputChange(e)}
                                 handleSerialNumberChange={(e) => this.props.handleInputChange(e)}
-                                add={this.addProduct.bind(this)} />
+                                add={this.addProduct.bind(this)}
+                                close={this.closeAdd.bind(this)} />
                         </div>
                         : null}
                 </div>
@@ -46,7 +64,7 @@ class Products extends Component {
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th onClick={e => sortColumn(e, this.props)}>Price</th>
+                            <th onClick={(e) => this.sortColumn(e)}>Price</th>
                             <th>Serial Number</th>
                             <th></th>
                             <th></th>
@@ -74,6 +92,12 @@ class Products extends Component {
         });
     }
 
+    closeAdd() {
+        this.setState({
+            showAdd: false
+        });
+    }
+
     addProduct() {
         this.setState({
             showAdd: false
@@ -81,17 +105,24 @@ class Products extends Component {
 
         this.props.addProduct();
     }
-}
 
-const sortColumn = (e, props) => {
-    //console.log(props.products);
-    //if (props.products) {
-    //    console.log(props.products.sort((a, b) => a.price - b.price));
-    //    return props.products.sort((a, b) => a.price - b.price);
-    //}
-    console.log("Sort");
-}
+    sortColumn(e) {
+        this.props.products.sort((a, b) => a.price - b.price);
+        this.props.sortColumn();
 
+    }
+
+    //const sortRows = (initialRows, sortColumn, sortDirection) => rows => {
+    //    const comparer = (a, b) => {
+    //        if (sortDirection === "ASC") {
+    //            return a[sortColumn] > b[sortColumn] ? 1 : -1;
+    //        } else if (sortDirection === "DESC") {
+    //            return a[sortColumn] < b[sortColumn] ? 1 : -1;
+    //        }
+    //    };
+    //    return sortDirection === "NONE" ? initialRows : [...rows].sort(comparer);
+    //};
+}
 
 
 const editProduct = () => {

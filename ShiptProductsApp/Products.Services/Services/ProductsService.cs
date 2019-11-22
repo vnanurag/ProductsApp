@@ -17,7 +17,7 @@ namespace Products.Services.Services
             _dynamoDbRepo = dynamoDbRepo;
         }
 
-        public void AddProduct(ProductInfo product)
+        public async Task<ProductInfo[]> AddProduct(ProductInfo product)
         {
             try
             {
@@ -29,7 +29,18 @@ namespace Products.Services.Services
                     SerialNumber = product.SerialNumber
                 };
 
-                _dynamoDbRepo.AddProduct(dbProduct);
+                var output = await _dynamoDbRepo.AddProduct(dbProduct);
+                var result = output
+                    .Select(x => new ProductInfo
+                    {
+                        ProductId = x.ProductId,
+                        Name = x.Name,
+                        Price = x.Price,
+                        SerialNumber = x.SerialNumber
+                    })
+                    .ToArray();
+
+                return result;
             }
             catch (Exception ex)
             {

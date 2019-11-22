@@ -40,7 +40,7 @@ namespace Products.DataAccess.Repos
             _context = new DynamoDBContext(_dynamoDBClient);
         }
 
-        public async void AddProduct(ProductInfo product)
+        public async Task<ProductInfo[]> AddProduct(ProductInfo product)
         {
             try
             {
@@ -53,6 +53,8 @@ namespace Products.DataAccess.Repos
                 };
 
                 await _context.SaveAsync(newProduct);
+                var result = await GetProducts();
+                return result;
             }
             catch (Exception ex)
             {

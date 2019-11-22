@@ -9,3 +9,7 @@
 .addProduct input{
     margin-left: 10px;
 }
+
+.addProduct button{
+    margin: 10px;
+}

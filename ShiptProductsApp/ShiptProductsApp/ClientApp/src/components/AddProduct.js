@@ -19,6 +19,7 @@ export default class AddProduct extends Component {
                 </div>
                 <div>
                     <button onClick={this.props.add}>+ Add</button>
+                    <button onClick={this.props.close}>Close</button>
                 </div>
             </div>
             );

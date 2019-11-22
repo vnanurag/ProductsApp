@@ -71,17 +71,17 @@ namespace ProductsApp.Controllers
         /// </summary>
         /// <param name="value">Details of the product to be added</param>
         [HttpPost("add")]
-        public void Post([FromBody] ProductInfo product)
+        public async Task<IEnumerable<ProductInfo>> Post([FromBody] ProductInfo product)
         {
             try
             {
                 var randomProductId = new Random();
                 product.ProductId = randomProductId.Next();
-                _productsService.AddProduct(product);
+                var result = await _productsService.AddProduct(product);
+                return result.ToArray();
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }

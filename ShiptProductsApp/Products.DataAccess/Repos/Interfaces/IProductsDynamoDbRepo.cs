@@ -11,7 +11,7 @@ namespace Products.DataAccess.Repos.Interfaces
     {
         Task<ProductInfo[]> GetProducts();
         Task<ProductInfo> GetProductById(int id);
-        void AddProduct(ProductInfo product);
+        Task<ProductInfo[]> AddProduct(ProductInfo product);
         Task<ProductInfo> UpdateProduct(ProductInfo product);
         void DeleteProduct(int id);
 

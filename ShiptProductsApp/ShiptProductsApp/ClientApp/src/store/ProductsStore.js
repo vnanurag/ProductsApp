@@ -22,11 +22,13 @@ const nameInputChanged = "NAME_INPUT_CHANGED";
 const priceInputChanged = "PRICE_INPUT_CHANGED";
 const serialNumberInputChanged = "SERIAL_NUMBER_INPUT_CHANGED";
 
+const priceSort = "SORTED_BY_PRICE";
+
 const initialState = {
     products: [],
     product: {
         name: '',
-        price: 0,
+        price: '',
         serialNumber: ''
     },
     isLoading: false
@@ -134,7 +136,7 @@ export const actionCreators = {
         }  
     },
 
-    handleInputChange: (input) => async (dispatch) => {
+    handleInputChange: (input) => async (dispatch, getState) => {
         let inputType = input.target.id;
         let value = input.target.value;
 
@@ -147,6 +149,12 @@ export const actionCreators = {
         else if (inputType === 'serialNumber') {
             dispatch({ type: serialNumberInputChanged, value })
         }
+    },
+
+    sortColumn: () => async (dispatch, getState) => {
+        const state = getState();
+        const products = state.products.products;
+        dispatch({ type: priceSort, products })
     }
 };
 
@@ -204,6 +212,7 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 products: action.products,
+                product: [],
                 isLoading: false
             }
         }
@@ -238,7 +247,7 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 isLoading: true
-            };
+            }
         }
         case requestDeleteProductSuccess: {
             return {
@@ -261,7 +270,7 @@ export const reducer = (state, action) => {
                     ...state.product,
                     name: action.value
                 }
-            };
+            }
         }
         case priceInputChanged: {
             return {
@@ -270,7 +279,7 @@ export const reducer = (state, action) => {
                     ...state.product,
                     price: action.value
                 }
-            };
+            }
         }
         case serialNumberInputChanged: {
             return {
@@ -279,7 +288,13 @@ export const reducer = (state, action) => {
                     ...state.product,
                     serialNumber: action.value
                 }
-            };
+            }
+        }
+        case priceSort: {
+            return {
+                ...state,
+                products: action.products
+            }
         }
         default: {
             return state;
